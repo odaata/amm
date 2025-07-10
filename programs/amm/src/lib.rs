@@ -1,3 +1,6 @@
+#![allow(unexpected_cfgs)]
+#![allow(deprecated)]
+
 pub mod constants;
 pub mod error;
 pub mod instructions;
@@ -15,7 +18,7 @@ declare_id!("F9LBCDjVYHwWkvyuyMymi5bGFDanFTjEQmkmHksJeFyK");
 pub mod amm {
     use super::*;
 
-    pub fn initialize(ctx: Context<Initialize>) -> Result<()> {
-        initialize::handler(ctx)
+    pub fn initialize(ctx: Context<Initialize>, seed: u64, fee: u16, authority: Option<Pubkey>) -> Result<()> {
+        ctx.accounts.initialize(seed, fee, authority, &ctx.bumps)
     }
 }
